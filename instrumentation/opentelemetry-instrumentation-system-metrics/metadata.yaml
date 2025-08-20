@@ -1,0 +1,39 @@
+name: SystemMetrics
+instrumentation_name: system_metrics
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-system-metrics
+package_name: opentelemetry-instrumentation-system-metrics
+stability: stable
+description: This instrumentation provides automatic collection of system and process metrics such as CPU, memory, and network usage.
+settings:
+  - property: otel.python.system_metrics.enabled
+    env: OTEL_PYTHON_SYSTEM_METRICS_ENABLED
+    description: If true, enables the System Metrics instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.python.system_metrics.configuration
+    env: OTEL_PYTHON_SYSTEM_METRICS_CONFIG
+    description: A JSON string to configure custom metrics collection.
+    default: '{}'
+    type: string
+    category: instrumentation
+spans:
+  - name: 'System Metrics Collection'
+    kind: INTERNAL
+    attributes:
+      - name: system.cpu.time
+      - name: system.cpu.utilization
+      - name: system.memory.usage
+      - name: system.memory.utilization
+      - name: system.swap.usage
+      - name: system.swap.utilization
+      - name: system.disk.io
+      - name: system.disk.operations
+      - name: system.network.packets
+      - name: process.cpu.time
+      - name: process.memory.usage
+      - name: process.thread.count
+      - name: process.context_switches
+ 
+
+This `metadata.yaml` file includes the required environment variables, descriptions, types, and defaults based on the provided source code. The spans section is included to reflect the metrics being collected.

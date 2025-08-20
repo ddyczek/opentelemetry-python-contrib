@@ -1,0 +1,39 @@
+name: Redis
+instrumentation_name: redis
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-redis
+package_name: opentelemetry-instrumentation-redis
+stability: stable
+description: This instrumentation provides automatic tracing for Redis queries.
+settings:
+  - property: otel.python.redis.enabled
+    env: OTEL_PYTHON_REDIS_ENABLED
+    description: If true, enables the Redis instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.instrumentation.redis.request_hook
+    env: OTEL_PYTHON_REDIS_REQUEST_HOOK
+    description: A user-defined function to execute before a Redis command.
+    default: ''
+    type: string
+    category: instrumentation
+  - property: otel.instrumentation.redis.response_hook
+    env: OTEL_PYTHON_REDIS_RESPONSE_HOOK
+    description: A user-defined function to execute after a Redis command.
+    default: ''
+    type: string
+    category: instrumentation
+spans:
+  - name: 'Redis {command}'
+    kind: CLIENT
+    attributes:
+      - name: db.statement
+      - name: db.redis.args_length
+      - name: db.redis.index
+      - name: db.redis.query
+      - name: net.peer.name
+      - name: net.peer.port
+      - name: db.redis.database_index
+
+
+This `metadata.yaml` file includes the required environment variables, descriptions, types, and defaults based on the provided source code for the Redis instrumentation. The spans section is structured to reflect the Redis command execution pattern.

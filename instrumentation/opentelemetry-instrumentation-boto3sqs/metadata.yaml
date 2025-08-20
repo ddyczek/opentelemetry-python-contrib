@@ -1,0 +1,39 @@
+name: Boto3SQS
+instrumentation_name: boto3sqs
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-boto3sqs
+package_name: opentelemetry-instrumentation-boto3sqs
+stability: stable
+description: This instrumentation provides automatic tracing for AWS SQS applications using Boto3.
+settings:
+  - property: otel.python.boto3sqs.enabled
+    env: OTEL_PYTHON_BOTO3SQS_ENABLED
+    description: If true, enables the Boto3 SQS instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.instrumentation.boto3sqs.capture_headers.server.request
+    env: OTEL_PYTHON_BOTO3SQS_REQUEST_HEADERS
+    description: A comma-separated list of SQS request header names to capture.
+    default: ''
+    type: string
+    category: instrumentation
+  - property: otel.instrumentation.boto3sqs.capture_headers.server.response
+    env: OTEL_PYTHON_BOTO3SQS_RESPONSE_HEADERS
+    description: A comma-separated list of SQS response header names to capture.
+    default: ''
+    type: string
+    category: instrumentation
+spans:
+  - name: 'SQS {operation}'
+    kind: CONSUMER
+    attributes:
+      - name: messaging.system
+      - name: messaging.destination
+      - name: messaging.destination.kind
+      - name: messaging.url
+      - name: messaging.operation
+      - name: messaging.conversation_id
+      - name: messaging.message_id
+
+
+This `metadata.yaml` file includes the required environment variables, descriptions, types, and defaults based on the provided source code for the Boto3 SQS instrumentation. The spans section is structured to reflect the SQS operations.

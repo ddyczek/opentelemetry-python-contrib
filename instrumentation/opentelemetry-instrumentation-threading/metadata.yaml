@@ -1,0 +1,22 @@
+name: Threading
+instrumentation_name: threading
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-threading
+package_name: opentelemetry-instrumentation-threading
+stability: stable
+description: This instrumentation provides context propagation for threading operations in Python applications.
+settings:
+  - property: otel.python.threading.enabled
+    env: OTEL_PYTHON_THREADING_ENABLED
+    description: If true, enables the threading instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+spans:
+  - name: 'Thread {thread.name}'
+    kind: INTERNAL
+    attributes:
+      - name: threading.thread_id
+      - name: threading.thread_name
+      - name: threading.parent_id
+      - name: otel.status_code
+      - name: otel.status_description

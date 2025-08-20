@@ -1,0 +1,32 @@
+name: SQLite3
+instrumentation_name: sqlite3
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-sqlite3
+package_name: opentelemetry-instrumentation-sqlite3
+stability: stable
+description: This instrumentation provides automatic tracing for database operations in SQLite3 applications.
+settings:
+  - property: otel.python.sqlite3.enabled
+    env: OTEL_PYTHON_SQLITE3_ENABLED
+    description: If true, enables the SQLite3 instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.instrumentation.sqlite3.capture_query
+    env: OTEL_PYTHON_SQLITE3_CAPTURE_QUERY
+    description: If true, captures the SQL queries executed.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+spans:
+  - name: 'SQL {db.statement}'
+    kind: CLIENT
+    attributes:
+      - name: db.system
+      - name: db.statement
+      - name: db.name
+      - name: db.user
+      - name: net.peer.name
+      - name: net.peer.port
+
+
+This `metadata.yaml` file includes the necessary environment variables, descriptions, types, and defaults based on the provided source code for the SQLite3 instrumentation. The spans section is structured to reflect typical database operation tracing.

@@ -1,0 +1,43 @@
+name: Kafka
+instrumentation_name: kafka
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-kafka
+package_name: opentelemetry-instrumentation-kafka
+stability: stable
+description: This instrumentation provides automatic tracing for Kafka producer and consumer messages.
+settings:
+  - property: otel.python.kafka.enabled
+    env: OTEL_PYTHON_KAFKA_ENABLED
+    description: If true, enables the Kafka instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.python.kafka.produce_hook
+    env: OTEL_PYTHON_KAFKA_PRODUCE_HOOK
+    description: A callable function to be executed just before producing a message.
+    default: ''
+    type: string
+    category: instrumentation
+  - property: otel.python.kafka.consume_hook
+    env: OTEL_PYTHON_KAFKA_CONSUME_HOOK
+    description: A callable function to be executed just after consuming a message.
+    default: ''
+    type: string
+    category: instrumentation
+spans:
+  - name: 'Kafka {topic} send'
+    kind: PRODUCER
+    attributes:
+      - name: messaging.system
+      - name: messaging.destination
+      - name: messaging.kafka.partition
+      - name: messaging.url
+  - name: 'Kafka {topic} receive'
+    kind: CONSUMER
+    attributes:
+      - name: messaging.system
+      - name: messaging.destination
+      - name: messaging.kafka.partition
+      - name: messaging.url
+ 
+
+This `metadata.yaml` file includes the necessary environment variables, descriptions, types, and defaults based on the provided source code and follows the structure of the example YAML. The spans section is also included to reflect the Kafka producer and consumer operations.
