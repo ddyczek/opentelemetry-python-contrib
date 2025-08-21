@@ -1,0 +1,35 @@
+name: Logging
+instrumentation_name: logging
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-logging
+package_name: opentelemetry-instrumentation-logging
+stability: stable
+description: This instrumentation provides automatic tracing context injection into log statements for Python's standard logging module.
+settings:
+  - property: otel.python.logging.log_correlation
+    env: OTEL_PYTHON_LOG_CORRELATION
+    description: If true, enables trace context injection into log statements.
+    default: 'false'
+    type: boolean
+    category: instrumentation
+  - property: otel.python.logging.log_format
+    env: OTEL_PYTHON_LOG_FORMAT
+    description: Custom logging format to use for log statements.
+    default: '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s trace_sampled=%(otelTraceSampled)s] - %(message)s'
+    type: string
+    category: instrumentation
+  - property: otel.python.logging.log_level
+    env: OTEL_PYTHON_LOG_LEVEL
+    description: Sets the logging level for the logger.
+    default: 'info'
+    type: string
+    category: instrumentation
+spans:
+  - name: 'Log {level}'
+    kind: INTERNAL
+    attributes:
+      - name: log.level
+      - name: log.message
+      - name: log.trace_id
+      - name: log.span_id
+      - name: log.service_name
+      - name: log.sampled

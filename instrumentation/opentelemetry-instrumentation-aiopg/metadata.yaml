@@ -1,0 +1,54 @@
+name: Aiopg
+instrumentation_name: aiopg
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-aiopg
+package_name: opentelemetry-instrumentation-aiopg
+stability: stable
+description: This instrumentation provides automatic tracing for PostgreSQL database interactions using the aiopg library.
+settings:
+  - property: otel.python.aiopg.enabled
+    env: OTEL_PYTHON_AIOPG_ENABLED
+    description: If true, enables the aiopg instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.instrumentation.aiopg.capture_query
+    env: OTEL_PYTHON_AIOPG_CAPTURE_QUERY
+    description: If true, captures SQL queries executed through aiopg.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.instrumentation.aiopg.database
+    env: OTEL_PYTHON_AIOPG_DATABASE
+    description: The name of the database to connect to.
+    default: ''
+    type: string
+    category: instrumentation
+  - property: otel.instrumentation.aiopg.user
+    env: OTEL_PYTHON_AIOPG_USER
+    description: The username used to connect to the database.
+    default: ''
+    type: string
+    category: instrumentation
+  - property: otel.instrumentation.aiopg.host
+    env: OTEL_PYTHON_AIOPG_HOST
+    description: The host of the database server.
+    default: '127.0.0.1'
+    type: string
+    category: instrumentation
+  - property: otel.instrumentation.aiopg.port
+    env: OTEL_PYTHON_AIOPG_PORT
+    description: The port of the database server.
+    default: '5432'
+    type: integer
+    category: instrumentation
+spans:
+  - name: 'SQL {query}'
+    kind: CLIENT
+    attributes:
+      - name: db.system
+      - name: db.name
+      - name: db.user
+      - name: db.statement
+      - name: db.connection_string
+      - name: net.peer.name
+      - name: net.peer.port

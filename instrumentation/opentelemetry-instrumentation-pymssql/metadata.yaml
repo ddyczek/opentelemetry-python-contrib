@@ -1,0 +1,34 @@
+name: PyMSSQL
+instrumentation_name: pymssql
+source_href: https://github.com/open-telemetry/opentelemetry-python-contrib/tree/main/instrumentation/opentelemetry-instrumentation-pymssql
+package_name: opentelemetry-instrumentation-pymssql
+stability: stable
+description: This instrumentation provides automatic tracing for database operations using the pymssql library.
+settings:
+  - property: otel.python.pymssql.enabled
+    env: OTEL_PYTHON_PYMSSQL_ENABLED
+    description: If true, enables the PyMSSQL instrumentation.
+    default: 'true'
+    type: boolean
+    category: instrumentation
+  - property: otel.python.pymssql.tracer_provider
+    env: OTEL_PYTHON_PYMSSQL_TRACER_PROVIDER
+    description: The tracer provider to use for instrumentation. If omitted, the globally configured one is used.
+    default: ''
+    type: string
+    category: instrumentation
+spans:
+  - name: 'DB {db.statement}'
+    kind: CLIENT
+    attributes:
+      - name: db.system
+      - name: db.name
+      - name: db.user
+      - name: db.statement
+      - name: net.peer.name
+      - name: net.peer.port
+      - name: db.protocol.tds.version
+      - name: db.charset
+ 
+
+This `metadata.yaml` file includes the necessary environment variables, descriptions, types, and defaults based on the provided source code and example YAML structure. The spans section is also included to reflect the database operation patterns.
