@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-INSTRUMENTATION_DIR="/Users/ddyczek/Desktop/python/opentelemetry-python-contrib/instrumentation"
-SCRIPT_PATH="/Users/ddyczek/Desktop/python/opentelemetry-python-contrib/metadata/metadata_generator.py"
+INSTRUMENTATION_DIR="./instrumentation"
+SCRIPT_PATH=".metadata/metadata_generator.py"
 
 
 for dir in "$INSTRUMENTATION_DIR"/opentelemetry-instrumentation-*/; do
